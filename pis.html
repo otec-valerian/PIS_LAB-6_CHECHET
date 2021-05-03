@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<section>
+</section>
+<script type="text/javascript">
+    const header = document.querySelector('header');
+    const section = document.querySelector('section');
+    var requestURL = 'http://api.openweathermap.org/data/2.5/weather?lat=24&lon=32&appid=8de37075d64308d9e11cc19d08d061c6';
+    fetch(requestURL).then(d => {return d.json()}).then(r => {showWeather(r)})
+    
+    /* request.onload = function()
+        //Ця функція виконується після отримання відповіді
+    {
+        var cityweather_json = request.response;
+        showWeather(cityweather_json);
+    } */
+    function showWeather(jsonObj) {
+        console.log(jsonObj);
+        var sHead = `${jsonObj.name}s weather`;
+        sHead = sHead + " Lat: " + jsonObj.coord.lon + " Lon: " + jsonObj.coord.lat;
+        var myArticle = document.createElement('article');
+        var myH1 = document.createElement('h1');
+        myH1.textContent = sHead;
+        myArticle.appendChild(myH1);
+        section.appendChild(myArticle);
+        var myPara1 = document.createElement('p');
+        var myPara2 = document.createElement('p');
+        var myPara3 = document.createElement('p');
+        var t1 = Math.round(jsonObj.main.temp - 273.16);
+        myPara1.textContent = 'Temperature: ' + t1 + " ^C";
+        myPara2.textContent = 'Pressure: ' + jsonObj.main.pressure;
+        myPara3.textContent = 'Humidity: ' + jsonObj.main.humidity;
+        myArticle.appendChild(myPara1);
+        myArticle.appendChild(myPara2);
+        myArticle.appendChild(myPara3);
+        section.appendChild(myArticle);
+    }
+</script>
+</body>
+</html>
