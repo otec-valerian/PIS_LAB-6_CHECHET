@@ -14,15 +14,7 @@
     const section = document.querySelector('section');
     var requestURL = 'http://api.openweathermap.org/data/2.5/weather?lat=24&lon=32&appid=8de37075d64308d9e11cc19d08d061c6';
     fetch(requestURL).then(d => {return d.json()}).then(r => {showWeather(r)})
-    
-    /* request.onload = function()
-        //Ця функція виконується після отримання відповіді
-    {
-        var cityweather_json = request.response;
-        showWeather(cityweather_json);
-    } */
     function showWeather(jsonObj) {
-        console.log(jsonObj);
         var sHead = `${jsonObj.name}s weather`;
         sHead = sHead + " Lat: " + jsonObj.coord.lon + " Lon: " + jsonObj.coord.lat;
         var myArticle = document.createElement('article');
